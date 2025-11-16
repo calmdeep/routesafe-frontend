@@ -65,7 +65,7 @@ function App() {
 
   const verifyImageContent = async (imageData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/verify-image', {
+      const response = await fetch('https://routesafe-backend.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ function App() {
     setResult(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/detect', {
+      const response = await fetch('https://routesafe-backend.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

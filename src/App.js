@@ -18,6 +18,9 @@ function App() {
   useEffect(() => {
     getLocation();
   }, []);
+const cleanBase64 = (dataUrl) => {
+  return dataUrl.replace(/^data:image\/\w+;base64,/, "");
+};
 
   const getLocation = () => {
     setLoadingLocation(true);
@@ -67,11 +70,13 @@ function App() {
     try {
       const response = await fetch('https://routesafe-backend.onrender.com/api/verify-image', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ image: imageData })
-      });
+       headers: {
+  'Content-Type': 'application/json',
+},
+body: JSON.stringify({
+  image: imageData,   // clean base64
+})
+
 
       const data = await response.json();
       return data;
@@ -86,7 +91,10 @@ function App() {
     if (file) {
       const reader = new FileReader();
       reader.onload = async (e) => {
-        const imageData = e.target.result;
+        const imageData = cleanBase64(e.target.result);
+        setImage(imageData);
+
+
         
         setVerifying(true);
         const verification = await verifyImageContent(imageData);

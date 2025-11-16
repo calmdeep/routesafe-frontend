@@ -65,7 +65,7 @@ function App() {
 
   const verifyImageContent = async (imageData) => {
     try {
-      const response = await fetch('https://routesafe-backend.onrender.com', {
+      const response = await fetch('https://routesafe-backend.onrender.com/api/verify-image', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ function App() {
     setResult(null);
 
     try {
-      const response = await fetch('https://routesafe-backend.onrender.com', {
+      const response = await fetch('https://routesafe-backend.onrender.com/api/detect', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ function App() {
 
     } catch (error) {
       console.error('Detection error:', error);
-      alert('Error connecting to server. Make sure Flask backend is running on port 5000.');
+      alert('Error connecting to server. Please try again.');
     } finally {
       setLoading(false);
     }
